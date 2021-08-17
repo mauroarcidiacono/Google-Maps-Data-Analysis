@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <script src="https://kit.fontawesome.com/98bf70d6b4.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Google Maps Data Vis</title>
+</head>
+<body>
+<div id="bodycontainer">
+
+    <h1>Google Maps Data Visualization</h1>
+    
+    <br>
+
+<!-- Introduction -->
+
+    <p>I have always been interested in the personal data that Google stores from its users.
+         In particular, on this note, I will be addressing Google Maps data. 
+         I bought my first smartphone on 2015, and since that moment, Google has been tracking my location during several periods of 
+         time. My task in this work is to create visualizations using different tools in order to gain a deeper understanding on 
+         what is stored in Google's data center. </p>
+
+    <p>To start, I went to <a href="https://takeout.google.com/settings/takeout" target="_blank">Google Takeout</a> and I downloaded my location history. 
+        When I decompressed the file, I found a .json file called “Location History”. 
+        JSON (JavaScript Object Notation is an open-standard data format or interchange for semi-structured data. 
+        This format stores data in key-value pairs. In the file, I found the following keys: timestampMs, latitudeE7, longitudeE7, 
+        accuracy, activity, source, deviceTag, altitude, verticalAccuracy, platform, platformType, locationMetadata, velocity 
+        and heading. </p>
+
+    <p>In order to process all the data, I used R Studio. The library jsonlite allows to convert between JSON data and R objects. 
+        If you want to check the specifics of the code that I used and the pipelines to transform the information, visit the following
+        repository: <a href=https://github.com/mauroarcidiacono/Google-Maps-Data-Analysis target="_blank">Google-Maps-Data-Analysis</a>.</p>
+
+<!-- NA's in Dataframe -->
+
+    <h2>NA's in Dataframe</h2>
+
+    <p>To gain a deeper understanding of the data, I started by analysing the NA's in the Dataframe. 
+        In datasets, NA can mean Not Available, Not Applicable or No Answer. In the case of the Google Maps data, the NAs represent data 
+        that is not available. To represent the NA's, I forked the Bubble-o-matic project of Mike Bostock on observablehq 
+        (<a href="https://observablehq.com/@marcidiacono/bubble-o-matic">Bubble-o-matic</a>). The area of each circle is determined by the number of NA's. 
+        Out of the 14 variables, only 6 have NA's, therefore, the others were not represented. The total number of considered observations is 667294.</p>
+    
+    <svg text-anchor="middle" 
+    viewBox="13.158832550048828 55.90546417236328 273.6477355957031 242.21844482421875" xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g fill="#3944bc"><circle cx="107.75595301862683" cy="180.95569788572348" r="40.709644357754165"/>
+        <circle cx="192.0512926095525" cy="180.95569788572348" r="40.709644357754165"/>
+        <circle cx="149.90362281408966" cy="255.27276588374423" r="41.85113912420511"/>
+        <circle cx="149.90362281408966" cy="109.25424848487424" r="39.58595808314724"/>
+        <circle cx="60.88494849533605" cy="103.75898237675077" r="46.72611988752915"/>
+        <circle cx="239.000001068924" cy="103.71204539510046" r="46.806578087589685"/>
+    </g>
+    <g pointer-events="none"><text fill="#fff" transform="translate(107.75595301862683,180.95569788572348)">
+        <tspan x="0" y="-2.1999999999999993">Altitude</tspan><tspan x="0" y="8.8" font-weight="300" fill-opacity="0.5">484,929</tspan>
+    </text><text fill="#fff" transform="translate(192.0512926095525,180.95569788572348)">
+        <tspan x="0" y="-2.1999999999999993">VerticalAccuracy</tspan>
+        <tspan x="0" y="8.8" font-weight="300" fill-opacity="0.5">484,929</tspan></text>
+        <text fill="#fff" transform="translate(149.90362281408966,255.27276588374423)">
+            <tspan x="0" y="-2.1999999999999993">Platform</tspan>
+            <tspan x="0" y="8.8" font-weight="300" fill-opacity="0.5">512,505</tspan></text>
+            <text fill="#fff" transform="translate(149.90362281408966,109.25424848487424)">
+                <tspan x="0" y="-2.1999999999999993">PlatformType</tspan><tspan x="0" y="8.8" font-weight="300" fill-opacity="0.5">458,528</tspan></text>
+                <text fill="#fff" transform="translate(60.88494849533605,103.75898237675077)">
+                    <tspan x="0" y="-2.1999999999999993">Velocity</tspan><tspan x="0" y="8.8" font-weight="300" fill-opacity="0.5">638,856</tspan></text>
+                    <text fill="#fff" transform="translate(239.000001068924,103.71204539510046)"><tspan x="0" y="-2.1999999999999993">Heading</tspan>
+                        <tspan x="0" y="8.8" font-weight="300" fill-opacity="0.5">641,058</tspan></text></g>
+    </svg>
+
+    <p>The graphic was done using SVG, id est, scalable vector graphics. SVG is a graphic bidimensional vectorial format that uses the XML syntax. 
+        SVG allows for three types of graphic objects: vector graphic shapes (e.g., paths consisting of straight lines and curves), images and text. 
+        Graphical objects can be grouped, styled, transformed and composited. The feature set includes nested transformations, clipping paths, alpha 
+        masks, filter effects and template objects.</p>
+
+<!-- Number of observations per year -->
+
+    <h2>Number of observations per year</h2>
+
+    <p>Since 17/04/2015 to 06/08/2021, Google has collected a total of 321905 observations. The following visualization is a Tree Map that was 
+        created using Tableau. The Tree Map is useful to show the parts of a total by representing values with proportional areas. It can be 
+        observed that the year with the highest data collection was 2019, with 68593, and the lowest was 2021 with 20912. It is reasonable 
+        that 2015 and 2021 were the years where the lowest quantities of observations were recorded, since, in both cases, the collection was 
+        not done during the complete year. </p>
+
+    <div class = "tableau">
+        <div class='tableauPlaceholder' id='viz1629066775073' style='position: relative'><noscript><a href='#'><img alt='Number of observations per year' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Tr&#47;Treemap_Google_Maps_Observations&#47;Treemap&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Treemap_Google_Maps_Observations&#47;Treemap' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Tr&#47;Treemap_Google_Maps_Observations&#47;Treemap&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1629066775073');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
+
+<!-- Number of locations tracked per week by year -->
+
+    <h2 class="aftertableau">Locations tracked per week by year</h2>
+
+    <p>The following graph was created using R's ggplot2 library. The visualization portrays the number of observations per week during each year. 
+        In this graph, the time periods where I did not have the “Location” activated in my phone can be appreciated since in those time gaps there 
+        are no tracks. On the other hand, it can be observed that the count number varies considerably from week to week. </p>
+
+    <img id="locationweekyear" class="img-fluid" src="img/Rplot03.png" alt="Locations tracked by Google per week by year">
+    
+<!-- Box plot per day, month and year -->
+
+    <h2>Locations tracked per week by year</h2>
+
+    <p>The box plot is a graph that allows to represent data using the median and the quartiles. 
+        In this case, the whiskers are calculated adding or subtracting 1.5 times the interquartile range. 
+        Data points that exceed the whiskers are outliers. The spacings between the parts of the box indicate the degree of dispersion 
+        and skewness is the data. </p>
+
+    <img id="boxplot" class="img-fluid graphs_R" src="img/Rplot05.png" alt="Box plot of locations tracked per day, month and year">
+    
+    <p>It can be observed that the median data collection value per day is between 100 and 200. 
+        The spread of the data increases as I consider longer time frames. In the case of the year boxplot, a negative skew can be visualized.</p>
+
+<!-- Accuracy of the observations -->
+
+    <h2>Accuracy of the observations</h2>
+
+    <p>How accurate are Google Maps observations? The accuracy variable let us know how close are we to the actual position of the device. 
+        Using Tableau, after processing the data in R Studio, I built a histogram to analyze this particular variable. 
+        I considered 100 m or less as high accuracy, 500 m or less as middle accuracy and over 500 m as low accuracy. 
+        The graph shows that most observations achieve a 100 m or less accuracy. I can state that Google Maps observations are, in general, 
+        quite accurate. </p>
+
+    <div class = "tableau">
+        <div class='tableauPlaceholder' id='viz1629067446111' style='position: relative'><noscript><a href='#'><img alt='Accuracy of Observations ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Go&#47;Google_Maps_Accuracy_Histogram&#47;Histogram&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Google_Maps_Accuracy_Histogram&#47;Histogram' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Go&#47;Google_Maps_Accuracy_Histogram&#47;Histogram&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1629067446111');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
+
+<!-- Altitude -->
+
+    <h2 class="aftertableau">Altitude of the observations</h2>
+
+    <p>Using R, I decided to analyze the altitude above sea level registered in the observations of the last two years. 
+        High values are compatible with plane flights and mountain trips. The loss of altitude that can be appreciated between 
+        August and September of 2020 is due to the fact that I moved to a different city. </p>
+
+    <img class="img-fluid graphs_R" src="img/Rplot10.png" alt="">
+
+<!-- Total Activities -->
+
+    <h2>Activities collected by Google Maps</h2>
+
+    <p>The .json file that I downloaded possess activity information, so I decided to build a bar chart of all activities, to visualize which 
+        one is more predominant according to Google. By a big difference, according to this data, the device spends most of its time still. 
+        Tilting means that the device angle relative to gravity changed significantly, and this is the second most common activity. </p>
+
+    <img id="activitiescollected" class="img-fluid graphs_R" src="img/Rplot12.png" alt="">
+
+<!-- Activities per day of the week -->
+    <br>
+    <p>When the activity data is represented per week day, the tendency does not change significatively. 
+        These charts make me thing that I should start biking more. I find quite interesting that one of the registered activities 
+        is exiting vehicle.</p>
+    <br>
+    <img id="activitiescollected" class="img-fluid graphs_R" src="img/Rplot14.png" alt="">
+
+<!-- Movement trend graph - positions -->
+
+    <h2>Leaflet Maps</h2>
+    
+    <p>Leaflet is a wonderful library for R. I will quote <a href="https://leafletjs.com/">leafletjs.com</a>:
+        <blockquote> "Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps. Weighing just about 39 KB of JS, 
+            it has all the mapping features most developers ever need.
+        Leaflet is designed with simplicity, performance and usability in mind. It works efficiently across all major desktop and mobile platforms, 
+        can be extended with lots of plugins, has a beautiful, easy to use and well-documented API and a simple, readable source code that is a 
+        joy to contribute to". </blockquote>
+        With leaflet I created two interactive maps. The first one represents movement trends and the second one is a heatmap. You can access both of them by clicking in the images below. 
+        </p>
+
+    <h3>Movements Trend Graphs</h3>
+
+    <a href="/leafletmap.html" target="_blank"><img class="graphs_R clickgraphs" src="img/Rplot16.png" alt="Leaflet map to analyze moving trends"></a>
+
+<!-- Heatmap -->
+
+    <h3>Heatmap</h3>
+
+    <a href="/heatmap.html" target="_blank"><img class="graphs_R clickgraphs" src="img/Rplot17.png" alt="Leaflet heatmap to analyze "></a>
+
+</div>
+
+    <footer>
+        <p>Data Analysis by Mauro Francisco Arcidiacono</p>
+        <div id="container-contact-li">
+            <ul id="contact-li">
+                <a class="contact-link-element" href="https://www.linkedin.com/in/mauro-francisco-arcidiacono/" target="_blank">
+                    <li class="contact-element">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </li>
+                </a>
+                <a class="contact-link-element" id="profile-link" href="https://github.com/mauroarcidiacono" target="_blank">
+                    <li class="contact-element">
+                        <i class="fab fa-github"></i> GitHub
+                    </li>
+                </a>
+                <a class="contact-link-element" href="mailto:arcidiaconomauro@gmail.com" target="_blank">
+                    <li class="contact-element"><i class="fas fa-at"></i> Send a email
+                    </li>
+                </a>
+                <a class="contact-link-element" href="tel:+5492235201118" target="_blank">
+                    <li class="contact-element"><i class="fas fa-mobile-alt"></i> Call me
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>
