@@ -1,0 +1,170 @@
+#bodycontainer {
+    margin: 2%;
+    margin-left: 7em;
+    margin-right: 7em;
+}
+
+svg {
+    margin: auto;
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 40%; 
+    height: auto; 
+    background: rgb(255, 255, 255); 
+    font: 10px sans-serif;
+}
+
+.tableau {
+    width: 50%;
+    margin: auto;
+}
+
+#locationweekyear {
+    margin: auto;
+    display: block;
+    width: 70%;
+}
+
+.graphs_R {
+    margin: auto;
+    display: block;
+}
+
+.clickgraphs {
+    width: 40%;
+}
+
+#boxplot {
+    width: 70%;
+}
+
+h2 {
+    margin-top: 1.5em;
+}
+
+#activitiescollected {
+    width: 70%;
+}
+
+blockquote {
+    font-style: italic;
+    margin-left: 4em;
+    margin-right: 4em;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 1em;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #404849;
+    color: #FFF;
+    font-size: 20px;
+    padding: 15px;
+    margin-top: 4em;
+}
+
+#contact-li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0px;
+}
+
+.contact-element {
+    font-size: 17px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#contact-li a:hover {
+    animation-name: contact-animation;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes contact-animation{
+    0% {
+        color: blue;
+    }
+    100% {
+        color: #FFF;
+    }
+}
+
+.contact-link-element {
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+@media (max-width: 800px) {
+    #bodycontainer {
+        margin: 0%;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    svg {
+        margin: auto;
+        display: block;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 70%; 
+        height: auto; 
+        background: rgb(255, 255, 255); 
+        font: 10px sans-serif;
+    }
+
+    .tableau {
+        width: 100%;
+        margin: auto;
+    }
+    
+    #locationweekyear {
+        margin: auto;
+        display: block;
+        width: 100%;
+    }
+    
+    .graphs_R {
+        margin: auto;
+        display: block;
+    }
+    
+    .clickgraphs {
+        width: 60%;
+    }
+    
+    #boxplot {
+        width: 100%;
+    }
+    
+    h2 {
+        margin-top: 1.5em;
+    }
+    
+    #activitiescollected {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    svg {
+        margin: auto;
+        display: block;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 100%; 
+        height: auto; 
+        background: rgb(255, 255, 255); 
+        font: 10px sans-serif;
+    }
+} 
